@@ -14,7 +14,6 @@ name: cd-pythonmssql
       - ci-PythonMSSQL
     branches:
       - main
-      - main
     paths:
       - '**/PythonMSSQL/**'
     types:
@@ -33,19 +32,6 @@ jobs:
           echo ENVIRONMENT=env>> $GITHUB_ENV
           echo "RUN_NUMBER=${{github.event.workflow_run.run_number}}" >> $GITHUB_ENV
           echo "BRANCH_NAME=${{ github.event.workflow_run.head_branch }}" >> $GITHUB_ENV
-      - if: |
-          github.event.inputs.environment == '' && contains(github.event.workflow_run.head_branch, 'main')
-        name: Set env env
-        run: |-
-          echo ENVIRONMENT=env>> $GITHUB_ENV
-          echo "RUN_NUMBER=${{github.event.workflow_run.run_number}}" >> $GITHUB_ENV
-          echo "BRANCH_NAME=${{ github.event.workflow_run.head_branch }}" >> $GITHUB_ENV
-      - if: |
-          github.event.inputs.environment == 'env'
-        run: |
-          echo ENVIRONMENT=env>> $GITHUB_ENV
-          echo "RUN_NUMBER=${{github.event.inputs.run_number}}" >> $GITHUB_ENV
-          echo "BRANCH_NAME=${{ github.ref_name }}" >> $GITHUB_ENV
       - if: |
           github.event.inputs.environment == 'env'
         run: |
