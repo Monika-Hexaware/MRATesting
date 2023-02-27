@@ -17,4 +17,4 @@ RUN apt-get install -y gcc
 RUN pip install pipenv==2023.2.18 && pipenv install --system --deploy
 COPY . /app 
 EXPOSE 3000
-CMD ["python", "main.py"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "3000"]
