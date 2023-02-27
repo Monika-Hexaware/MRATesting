@@ -10,11 +10,11 @@ ENV PYTHONUNBUFFERED=1
 # initialize working directory
 WORKDIR /app
 # Install & use pipenv
-COPY Pipfile Pipfile.lock /app/
+COPY Pipfile /app/
 RUN apt-get update
 RUN apt-get install -y default-libmysqlclient-dev
 RUN apt-get install -y gcc
-RUN pip install pipenv && pipenv install --system --deploy
+RUN pip install pipenv==2023.2.18 && pipenv install --system --deploy
 COPY . /app 
 EXPOSE 3000
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "3000"]
+CMD ["python", "main.py"]
